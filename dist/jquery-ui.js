@@ -9828,7 +9828,7 @@ $.extend(Datepicker.prototype, {
 		}
 		if (maxDate) {
 			maxDraw = this._daylightSavingAdjust(new Date(maxDate.getFullYear(),
-				maxDate.getMonth() - (numMonths[0] * numMonths[1]) + 1, maxDate.getDate()));
+				maxDate.getMonth() - (numMonths[0] * numMonths[1]) + 1, 1));
 			maxDraw = (minDate && maxDraw < minDate ? minDate : maxDraw);
 			while (this._daylightSavingAdjust(new Date(drawYear, drawMonth, 1)) > maxDraw) {
 				drawMonth--;
@@ -10001,6 +10001,10 @@ $.extend(Datepicker.prototype, {
 			for ( month = 0; month < 12; month++) {
 				if ((!inMinYear || month >= minDate.getMonth()) && (!inMaxYear || month <= maxDate.getMonth())) {
 					monthHtml += "<option value='" + month + "'" +
+						(month === drawMonth ? " selected='selected'" : "") +
+						">" + monthNamesShort[month] + "</option>";
+				} else {
+					monthHtml += "<option disabled='disabled' value='" + month + "'" +
 						(month === drawMonth ? " selected='selected'" : "") +
 						">" + monthNamesShort[month] + "</option>";
 				}
